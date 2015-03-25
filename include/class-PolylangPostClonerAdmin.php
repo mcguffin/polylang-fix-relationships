@@ -173,7 +173,7 @@ class PolylangPostClonerAdmin {
 		global $polylang;
 		$attachments = get_children( array( 'post_parent' => $source_post_id , 'post_type'   => 'attachment' ) );
 		foreach ( $attachments as $attachment ) {
-			$translation_group = $this->create_translation_group( $attachment , $langs );
+			$translation_group = $this->create_translation_group( $attachment , array_keys($parent_translation_group ) );
 			// all good here. Nothing to be done.
 			if ( $attachment->post_parent == $source_post_id )
 				continue;
