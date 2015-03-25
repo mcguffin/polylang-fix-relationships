@@ -85,17 +85,17 @@ class PolylangPostClonerAdmin {
 					);
 			}
 
-
-			$action = 'polylang_fix_relations';
-			$url_params = array(
-				'polylang_action' => $action,
-				'from_post' => $post->ID,
-			);
-			$href = wp_nonce_url( add_query_arg( $url_params ) , $action );
-			$actions['fix_relations'] = sprintf( '<a href="%s">%s</a>',
-					$href, __( 'Fix Relations' , 'polylang-fix-relationships' )
+			if ( count($translations) ) {
+				$action = 'polylang_fix_relations';
+				$url_params = array(
+					'polylang_action' => $action,
+					'from_post' => $post->ID,
 				);
-
+				$href = wp_nonce_url( add_query_arg( $url_params ) , $action );
+				$actions['fix_relations'] = sprintf( '<a href="%s">%s</a>',
+						$href, __( 'Fix Relations' , 'polylang-fix-relationships' )
+					);
+			}
 		}
 		return $actions;
 	}
