@@ -1,0 +1,4 @@
+/* language columns in edit.php and edit-tags.php */
+th.column-polylang_cloner_actions, td.column-polylang_cloner_actions {
+	width: 10em;
+}
