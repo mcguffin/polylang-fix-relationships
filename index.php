@@ -61,7 +61,7 @@ endif;
  * @param string $classname
  */
 function polylang_postcloner_autoload( $classname ) {
-	$class_path = dirname(__FILE__). sprintf('/include/class-%s.php' , strtolower( $classname ) ) ; 
+	$class_path = dirname(__FILE__). sprintf('/include/class-%s.php' , $classname ) ; 
 	if ( file_exists($class_path) )
 		require_once $class_path;
 }
