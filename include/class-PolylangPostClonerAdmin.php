@@ -217,7 +217,7 @@ class PolylangPostClonerAdmin {
 			$post_arr['ID'] = 0;
 			$post_arr['comment_count'] = 0;
 			$post_arr['post_status'] = apply_filters( 'polylang_cloned_post_status' , $post_arr['post_status'] );
-			$post_arr['post_title'] .= sprintf( ' (%s)' , $lang->slug )
+			$post_arr['post_title'] .= sprintf( ' (%s)' , $lang->slug );
 			
 			// set translated parent
 			if ( $post_arr['post_parent'] && ($translated_parent = pll_get_post( $post_arr['post_parent'] , $lang ) ) ) {
