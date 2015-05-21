@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Polylang Fix Relationships v0.0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-04-09 11:45:53+0000\n"
+"Last-Translator: joern-lund <joern@flyingletters.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: German\n"
+"X-Poedit-Country: GERMANY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: \n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: include/class-PolylangPostClonerAdmin.php:84
+#@ polylang-fix-relationships
+msgid "Create Translation"
+msgid_plural "Create Translations"
+msgstr[0] "Übersetzung erstellen"
+msgstr[1] "Übersetzungen erstellen"
+
+#: include/class-PolylangPostClonerAdmin.php:96
+#@ polylang-fix-relationships
+msgid "Fix Relations"
+msgstr "Beziehungen reparieren"
+
+#: include/class-PolylangPostClonerAdmin.php:210
+#@ polylang-fix-relationships
+msgid "Source language is target language"
+msgstr "Ausgangssprache entspricht der Zielsprache"
+
+#: include/class-PolylangPostClonerAdmin.php:246
+#@ polylang-fix-relationships
+msgid "No such Language"
+msgstr "Keine solche Sprache"
+
