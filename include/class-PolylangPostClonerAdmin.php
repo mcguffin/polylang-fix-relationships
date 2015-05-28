@@ -7,6 +7,8 @@ class PolylangPostClonerAdmin {
 	 *	Holding the singleton instance
 	 */
 	private static $_instance = null;
+	
+	private $translated_posts_ids;
 
 	/**
 	 *	@return WP_reCaptcha
@@ -111,6 +113,7 @@ class PolylangPostClonerAdmin {
 			check_admin_referer( $_REQUEST['polylang_action'] );
 			$source_post_ids = (array) $_REQUEST['from_post'];
 			$source_post_ids = array_filter($source_post_ids , 'intval' );
+			$this->translated_posts_ids = array();
 			foreach ( $source_post_ids as $source_post_id ) {
 				$source_post_lang = pll_get_post_language( $source_post_id );
 			
@@ -129,7 +132,11 @@ class PolylangPostClonerAdmin {
 					do_action( 'pll_save_post' , $source_post_id , get_post( $source_post_id ) , $translation_group );
 				}
 			}
-			$redirect = remove_query_arg( array('new_langs','from_post','_wpnonce','polylang_action'));
+			if ( count( $this->translated_posts_ids ) === 1 ) {
+				$redirect = get_edit_post_link( $this->translated_posts_ids[0] , '' );
+			} else {
+				$redirect = remove_query_arg( array('new_langs','from_post','_wpnonce','polylang_action'));
+			}
 			wp_redirect($redirect);
 			exit();
 		}
@@ -156,6 +163,7 @@ class PolylangPostClonerAdmin {
 			if ( ($lang = $polylang->model->get_language($lang)) && ! isset( $translation_group[$lang->slug] ) ) {
 				$new_post_id = $this->make_post_translation( $source_post , $lang );
 				$translation_group[$lang->slug] = $new_post_id;
+				$this->translated_posts_ids[] = $new_post_id;
 			}
 		}
 		pll_save_post_translations($translation_group);
