@@ -75,6 +75,7 @@ class PolylangPostClonerWatchMeta {
 	 */
 	function handle_meta( $source_post_id , $source_post , $translation_group ) {
 		$watch_meta_keys = apply_filters( 'polylang_watch_meta_keys' , $this->watch_meta_keys );
+		$force_update = false;
 		foreach ( $translation_group as $lang => $new_post_id ) {
 			if ( $new_post_id != $source_post_id ) { // YES, we do this chack!
 				foreach ( $watch_meta_keys as $meta_key ) {
@@ -84,15 +85,22 @@ class PolylangPostClonerWatchMeta {
 						foreach ( $meta_value as $k => $v )
 							$meta_value[$k] = pll_get_post( $v , $lang );
 					} else if ( is_numeric( $meta_value ) ) {
-						$meta_value = pll_get_post( $meta_value , $lang );
+						
+						if ( $post = get_post( $meta_value ) ) {
+							if ( pll_is_translated_post_type( $post->post_type ) ) {
+								$meta_value = pll_get_post( $meta_value , $lang );
+							} else {
+								$force_update = true;
+							}
+						}
 					}
-					if ( $old_meta_value != $meta_value ) {
+					
+					if ( $force_update || ( $old_meta_value != $meta_value ) ) {
 						update_post_meta( $new_post_id , $meta_key , $meta_value );
 					}
 				}
 			}
 		}
-		
 	}
 	
 }
