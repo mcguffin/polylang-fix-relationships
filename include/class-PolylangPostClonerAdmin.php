@@ -62,8 +62,7 @@ class PolylangPostClonerAdmin {
 	 */
 	function row_actions( $actions , $post ) {
 		if ( pll_is_translated_post_type( $post->post_type ) ) {
-			global $polylang;
-			$translations = $polylang->model->get_translations( 'post' , $post->ID );
+			$translations = PLL()->model->post->get_translations( $post->ID );
 			$languages = pll_languages_list();
 			$current_language = pll_get_post_language($post->ID);
 
@@ -124,7 +123,7 @@ class PolylangPostClonerAdmin {
 							$translation_group = $this->create_translation_group( $source_post , $langs );
 							break;
 						case 'polylang_fix_relations':
-							$translation_group = $polylang->model->get_translations( 'post' ,  $source_post_id );
+							$translation_group = PLL()->model->post->get_translations( $source_post_id );
 							break;
 					}
 					// trigger save action.
@@ -151,16 +150,14 @@ class PolylangPostClonerAdmin {
 	 *	@return array translation group with language slugs as keys and post ids as values
 	 */
 	function create_translation_group( $source_post , $langs )  {
-		global $polylang;
-	
 		$source_post_lang = pll_get_post_language( $source_post->ID );
 		$translation_group = array(
 				$source_post_lang => $source_post->ID,
-			) + $polylang->model->get_translations( 'post' ,  $source_post->ID );
+			) + PLL()->model->post->get_translations( $source_post->ID );
 		
 		foreach ( $langs as $lang ) {
 			// check if is language
-			if ( ($lang = $polylang->model->get_language($lang)) && ! isset( $translation_group[$lang->slug] ) ) {
+			if ( ($lang = PLL()->model->get_language($lang)) && ! isset( $translation_group[$lang->slug] ) ) {
 				$new_post_id = $this->make_post_translation( $source_post , $lang );
 				$translation_group[$lang->slug] = $new_post_id;
 				$this->translated_posts_ids[] = $new_post_id;
@@ -178,7 +175,6 @@ class PolylangPostClonerAdmin {
 	 *	@param $langs array holding the target languages
 	 */
 	function handle_attachments( $source_post_id , $source_post , $parent_translation_group ) {
-		global $polylang;
 		$attachments = get_children( array( 'post_parent' => $source_post_id , 'post_type'   => 'attachment' ) );
 		foreach ( $attachments as $attachment ) {
 			$translation_group = $this->create_translation_group( $attachment , array_keys($parent_translation_group ) );
@@ -209,9 +205,7 @@ class PolylangPostClonerAdmin {
 		if ( is_numeric( $source_post ) )
 			$source_post = get_post( $source_post );
 		
-		global $polylang;
-		
-		if ( $lang = $polylang->model->get_language($lang) ) {
+		if ( $lang = PLL()->model->get_language($lang) ) {
 			$source_post_lang = pll_get_post_language( $source_post->ID );
 			// sourcelang is target lang, nothing to do!
 			if ( $lang->slug == $source_post_lang )
@@ -235,7 +229,7 @@ class PolylangPostClonerAdmin {
 			// prepare taxonomies
 			if ( $cloned_post_id = wp_insert_post( $post_arr ) ) {
 				pll_set_post_language( $cloned_post_id , $lang );
-				$polylang->model->clean_languages_cache();
+				PLL()->model->clean_languages_cache();
 				
 				// clone postmeta
 				$ignore_meta_keys = array( '_edit_lock' , '_edit_last' );
