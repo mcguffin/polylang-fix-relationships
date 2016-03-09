@@ -11,4 +11,4 @@ Features:
  - Clones post attachments to corresponding languages
  - Changes post thumbnail and ACF Relations (like post object, image, ...) to their corresponding translations
 
-Tested With WP 4.1.1, Polylang 1.7.2, ACF pro 5.x
+Tested With WP 4.4.2, Polylang 1.8.4, ACF pro 5.x

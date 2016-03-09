@@ -6,7 +6,7 @@ Plugin URI: https://github.com/mcguffin/polylang-fix-relationships
 Description: Manage post relationships like attachments or (ACF Relational fields) which are not covered by <a href="http://polylang.wordpress.com/">polylang</a> plugin.
 Author: Jörn Lund
 Author URI: https://github.com/mcguffin
-Version: 0.0.2
+Version: 0.0.3
 License: GPLv3
 */
 
