@@ -6,7 +6,7 @@ class PolylangPostClonerWatchMeta {
 	/**
 	 *	Will hold field types for all relational ACF fields
 	 */
-	private $acf_types_to_watch = array( 'gallery' , 'file' , 'image' , 'page_link' , 'post_object' , 'relationship' );
+	private $acf_types_to_watch = array( 'page_link' , 'post_object' , 'relationship' );
 	
 	/**
 	 *	Will hold meta_key names for all relational meta fields
@@ -40,6 +40,14 @@ class PolylangPostClonerWatchMeta {
 	private function __construct() {
 		add_action( 'init' , array( &$this , 'acf_init' ) );
 		add_action( 'pll_save_post' ,  array( &$this , 'handle_meta' ) , 20 , 3 );
+		$pll_options = get_option( 'polylang' );
+
+		if ( PLL()->options['media_support'] ) {
+			$this->acf_types_to_watch[] = 'image';
+			$this->acf_types_to_watch[] = 'gallery';
+			$this->acf_types_to_watch[] = 'file';
+		}
+		
 	}
 	
 	/**

@@ -32,8 +32,10 @@ class PolylangPostClonerAdmin {
 		add_action('admin_enqueue_scripts', array(&$this, 'admin_enqueue_scripts'));
 		add_action( 'load-edit.php' , array( &$this , 'do_clone_action' ) );
 		add_action( 'load-upload.php' , array( &$this , 'do_clone_action' ) );
-		if ( get_option( 'polylang_clone_attachments' ) )
+
+		if ( PLL()->options['media_support'] ) {
 			add_action( 'pll_save_post' ,  array( &$this , 'handle_attachments' ) , 15 , 3 );
+		}
 	}
 	
 	/**
