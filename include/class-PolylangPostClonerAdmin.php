@@ -88,7 +88,8 @@ class PolylangPostClonerAdmin {
 					);
 			}
 
-			if ( count($translations) ) {
+
+			if ( count( array_diff( array_keys( $translations ), array( $current_language ) ) ) ) {
 				$action = 'polylang_fix_relations';
 				$url_params = array(
 					'polylang_action' => $action,
