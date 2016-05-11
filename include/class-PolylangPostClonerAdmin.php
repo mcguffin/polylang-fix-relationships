@@ -68,7 +68,10 @@ class PolylangPostClonerAdmin {
 			$languages = pll_languages_list();
 			$current_language = pll_get_post_language($post->ID);
 
-			if (count($translations) != count( $languages ) ) {
+
+			// translations post cloner
+			if ( apply_filters( 'polylang_relationships_enable_clone', true ) 
+				&& count($translations) != count( $languages ) ) {
 				$missing_translations = array();
 				foreach ( $languages as $lang_slug )
 					if ( ! isset( $translations[$lang_slug] ) && $lang_slug != $current_language)
@@ -88,8 +91,12 @@ class PolylangPostClonerAdmin {
 					);
 			}
 
+			if () {
+			}
 
-			if ( count( array_diff( array_keys( $translations ), array( $current_language ) ) ) ) {
+			// fix relationships
+			if ( apply_filters( 'polylang_relationships_enable_fix', true )  
+				&& count( array_diff( array_keys( $translations ), array( $current_language ) ) ) ) {
 				$action = 'polylang_fix_relations';
 				$url_params = array(
 					'polylang_action' => $action,
