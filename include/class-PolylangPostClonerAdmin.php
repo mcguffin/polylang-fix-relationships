@@ -91,9 +91,6 @@ class PolylangPostClonerAdmin {
 					);
 			}
 
-			if () {
-			}
-
 			// fix relationships
 			if ( apply_filters( 'polylang_relationships_enable_fix', true )  
 				&& count( array_diff( array_keys( $translations ), array( $current_language ) ) ) ) {
