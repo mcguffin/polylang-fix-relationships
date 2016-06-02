@@ -46,7 +46,7 @@ class PolylangPostCloner {
 	 */
 	function plugins_loaded() {
 		load_plugin_textdomain( 'polylang-fix-relationships' , false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-		if ( is_admin() && class_exists( 'Polylang' ) ) {
+		if ( is_admin() && class_exists( 'Polylang' ) && function_exists( 'PLL' ) ) {
 			PolylangPostClonerAdmin::instance();
 			PolylangPostClonerWatchMeta::instance();
 		}
