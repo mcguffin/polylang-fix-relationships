@@ -1,6 +1,11 @@
 Polylang Fix Relationships 
 ==========================
 
+**This Plugin is discontinued.**  
+You might like to take a look at [Polylang Sync](https://github.com/mcguffin/polylang-sync) here on GitHub, which addresses a similar issue.
+
+---
+
 Manage post relationships like attachments, post parents and ACF Relational fields which are not 
 covered by [Polylang](http://polylang.wordpress.com) plugin.
 
